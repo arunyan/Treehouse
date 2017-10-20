@@ -11,7 +11,7 @@ function printMessage(username, badgeCount, points) {
     console.log(message);
 }
 
-function get(username) {
+function getProfile(username) {
   try {
   // Connect to the API URL https://teamtreehouse.com/meowterspace.json
   const request = https.get(`https://teamtreehouse.com/${username}.json`, response => {
@@ -19,7 +19,7 @@ function get(username) {
       let body ="";
         // Read the data
       response.on('data', data => {
-      body += data.toString();
+        body += data.toString();
       });
 
       response.on('end', () => {
@@ -44,3 +44,6 @@ request.on('error', printError);
     printError(error);
   }
 }
+
+const users = process.argv.slice(2);
+users.forEach(getProfile);
